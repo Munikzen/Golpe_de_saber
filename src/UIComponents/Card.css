@@ -1,0 +1,118 @@
+.card-3d-wrapper {
+    perspective: 1000px;
+    display: inline-block;
+    cursor: pointer;
+    width: 660px;
+    height: 870px;
+}
+
+.card-3d-wrapper:hover {
+    cursor: pointer;
+}
+
+.card-flip-inner {
+    position: relative;
+    width: 660px;
+    height: 870px;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.card-flip-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 660px;
+    height: 870px;
+    backface-visibility: hidden;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-back {
+    z-index: 2;
+}
+
+.card-front {
+    z-index: 1;
+}
+
+.card-front {
+    padding: 80px 60px 120px 60px !important;
+}
+
+.card-content {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.card-question {
+    margin-bottom: 30px;
+    color: #222;
+    font-weight: bold;
+    font-size: 1.4em;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    font-family: 'Fredoka', 'Rubik', sans-serif;
+    max-width: 75%;
+    line-height: 1.4;
+    padding: 0 30px;
+}
+
+.answer-display {
+    background-image: url('../img/Text_area_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px 30px;
+    margin: 20px 0;
+    border-radius: 8px;
+    animation: brushStroke 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-origin: center;
+    max-width: 90%;
+}
+
+.answer-display strong {
+    color: white;
+    font-family: 'Fredoka', 'Rubik', sans-serif;
+    font-size: 1.2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.answer-display p {
+    color: #1a3d1f;
+    font-family: 'Fredoka', 'Rubik', sans-serif;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+    line-height: 1.3;
+}
+
+@keyframes brushStroke {
+    0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1) rotate(2deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}

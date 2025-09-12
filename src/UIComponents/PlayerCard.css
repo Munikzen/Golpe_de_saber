@@ -1,0 +1,138 @@
+.player-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.player-name {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: 'Fredoka', 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 1.4em;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+    z-index: 10;
+    letter-spacing: 0.5px;
+}
+
+.hp-area {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    right: 10%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.abilities-area {
+    position: absolute;
+    bottom: 10%;
+    left: 12%;
+    right: 12%;
+    height: 25%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 12px 8px;
+}
+
+.ability-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.ability-icon img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.ability-icon img.active {
+    opacity: 1;
+    filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+
+.ability-icon img.inactive {
+    opacity: 0.4;
+    filter: grayscale(100%) brightness(0.7);
+}
+
+.ability-icon.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    border-radius: 8px;
+}
+
+.ability-icon.clickable {
+    border-color: rgba(255, 215, 0, 0.6);
+    animation: abilityPulse 2s infinite;
+}
+
+.ability-icon.clickable:hover {
+    background: rgba(255, 215, 0, 0.3);
+    transform: scale(1.15);
+    border-color: rgba(255, 215, 0, 1);
+}
+
+.ability-icon.clickable:hover img {
+    filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    transform: scale(1.1);
+}
+
+@keyframes abilityPulse {
+
+    0%,
+    100% {
+        border-color: rgba(255, 215, 0, 0.4);
+    }
+
+    50% {
+        border-color: rgba(255, 215, 0, 0.8);
+    }
+}
+
+.ability-icon:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.ability-icon:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .player-name {
+        font-size: 1em;
+    }
+
+    .ability-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .ability-icon img {
+        width: 25px;
+        height: 25px;
+    }
+}

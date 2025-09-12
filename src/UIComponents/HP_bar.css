@@ -1,0 +1,52 @@
+.heart-pop {
+    transition: transform 0.1s;
+}
+
+.heart-animate {
+    animation: pop 0.3s;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.7);
+        opacity: 0.5;
+    }
+
+    70% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.shield-icon {
+    width: 22px;
+    height: 22px;
+    margin-left: 8px;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+}
+
+.shield-animate {
+    animation: shield-pop 0.3s ease;
+}
+
+@keyframes shield-pop {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+
+    70% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
