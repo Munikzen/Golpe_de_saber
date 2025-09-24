@@ -44,7 +44,7 @@ function HealthBar({ hp, maxHp, shield }) {
                     src={heartFull}
                     alt="Full heart"
                     className={className}
-                    style={{ width: 27, height: 27, marginRight: 3 }}
+                    style={{ width: 34, height: 34, marginRight: 4 }}
                 />
             );
         } else if (currStates[i] === 'half') {
@@ -54,7 +54,7 @@ function HealthBar({ hp, maxHp, shield }) {
                     src={heartHalf}
                     alt="Half heart"
                     className={className}
-                    style={{ width: 27, height: 27, marginRight: 3 }}
+                    style={{ width: 34, height: 34, marginRight: 4 }}
                 />
             );
         } else {

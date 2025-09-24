@@ -510,66 +510,75 @@ function App() {
                     </Card>
                   </div>
                   {console.log('Render check - showAbilityIcon:', showAbilityIcon, 'availableAbility:', availableAbility, 'isCardFlipped:', isCardFlipped)}
-                  <div className="ability-section">
-                    {showAbilityIcon && availableAbility && (
-                      <div className="ability-reward-display-side">
-                        <p>¡RECOMPENSA!</p>
-                        <div className="ability-icon-reward">
+                </div>
+              </div>
+              <div className="center-column">
+                {/* Ability indicators section */}
+                {showAbilityIcon && availableAbility && (
+                  <div className="ability-reward-display-center">
+                    <p>¡RECOMPENSA!</p>
+                    <div className="ability-icon-reward">
+                      <img
+                        src={availableAbility === 'shield' ? AbilityShield :
+                          availableAbility === 'silence' ? AbilitySilence : AbilityX2}
+                        alt={`Habilidad ${availableAbility}`}
+                        className="ability-reward-icon"
+                      />
+                    </div>
+                  </div>
+                )}
+                {(activeAbilityType || players.some(p => p.x2Active)) && (
+                  <div className="active-ability-display-center">
+                    {players.some(p => p.x2Active) && !activeAbilityType && (
+                      <div className="active-ability-indicator">
+                        <p>¡X2 ACTIVO!</p>
+                        <div className="ability-icon-active">
                           <img
-                            src={availableAbility === 'shield' ? AbilityShield :
-                              availableAbility === 'silence' ? AbilitySilence : AbilityX2}
-                            alt={`Habilidad ${availableAbility}`}
-                            className="ability-reward-icon"
+                            src={AbilityX2}
+                            alt="X2 Activo"
+                            className="ability-active-icon pulsing"
                           />
                         </div>
                       </div>
                     )}
-                    {(activeAbilityType || players.some(p => p.x2Active)) && (
-                      <div className="active-ability-display">
-                        {players.some(p => p.x2Active) && !activeAbilityType && (
-                          <div className="active-ability-indicator">
-                            <p>¡X2 ACTIVO!</p>
-                            <div className="ability-icon-active">
-                              <img
-                                src={AbilityX2}
-                                alt="X2 Activo"
-                                className="ability-active-icon pulsing"
-                              />
-                            </div>
-                          </div>
-                        )}
-                        {activeAbilityType === 'silence' && gamePhase === 'ability-silence' && (
-                          <div className="active-ability-indicator">
-                            <p>SELECCIONA OBJETIVO</p>
-                            <div className="ability-icon-active">
-                              <img
-                                src={AbilitySilence}
-                                alt="Silencio Activo"
-                                className="ability-active-icon pulsing"
-                              />
-                            </div>
-                          </div>
-                        )}
+                    {activeAbilityType === 'silence' && gamePhase === 'ability-silence' && (
+                      <div className="active-ability-indicator">
+                        <p>SELECCIONA OBJETIVO</p>
+                        <div className="ability-icon-active">
+                          <img
+                            src={AbilitySilence}
+                            alt="Silencio Activo"
+                            className="ability-active-icon pulsing"
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
-                </div>
-                {gamePhase === 'answer-question' && isCardFlipped && (
-                  <div className="game-buttons">
-                    <CorrectButton
-                      onClick={handleCorrectAnswer}
-                      size={80}
-                    />
-                    <ShowAnswerButton
-                      onClick={handleShowAnswer}
-                      size={80}
-                    />
-                    <WrongButton
-                      onClick={handleWrongAnswer}
-                      size={80}
-                    />
-                  </div>
                 )}
+
+                <div className="game-buttons-column">
+                  <div className="buttons-column-title">
+                    <p>Respuestas</p>
+                  </div>
+                  <CorrectButton
+                    onClick={handleCorrectAnswer}
+                    width={120}
+                    height={80}
+                    disabled={!isCardFlipped || gamePhase !== 'answer-question'}
+                  />
+                  <ShowAnswerButton
+                    onClick={handleShowAnswer}
+                    width={120}
+                    height={80}
+                    disabled={!isCardFlipped || showAnswer || gamePhase !== 'answer-question'}
+                  />
+                  <WrongButton
+                    onClick={handleWrongAnswer}
+                    width={120}
+                    height={80}
+                    disabled={!isCardFlipped || gamePhase !== 'answer-question'}
+                  />
+                </div>
               </div>
               <div className="right-side">
                 <div className="game-instructions">
@@ -623,8 +632,8 @@ function App() {
                           shield={player.shield}
                           abilities={player.abilities}
                           background={player.color}
-                          width={392}
-                          height={274}
+                          width={490}
+                          height={343}
                           onAbilityClick={(abilityType) => handleAbilityActivation(player.id, abilityType)}
                           canUseAbilities={
                             player.id === activePlayerId &&

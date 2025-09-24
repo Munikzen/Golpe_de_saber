@@ -35,8 +35,8 @@
 .game-layout {
   display: flex;
   width: 100%;
-  max-width: 1400px;
-  gap: 40px;
+  max-width: 1800px;
+  gap: 30px;
   align-items: center;
   justify-content: center;
 }
@@ -45,7 +45,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
+  flex: 0 0 auto;
+}
+
+.center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 0 0 auto;
+  min-height: 400px;
+  gap: 10px;
+  padding-top: 20px;
 }
 
 .card-and-ability-container {
@@ -59,30 +70,20 @@
   flex: 0 0 auto;
 }
 
-.ability-section {
-  flex: 0 0 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 300px;
-  gap: 20px;
-}
-
 .right-side {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 0 0 820px;
+  flex: 0 0 1025px;
 }
 
 .players-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 20px;
+  gap: 25px;
   width: 100%;
-  max-width: 820px;
+  max-width: 1025px;
 }
 
 .player-card-wrapper {
@@ -133,8 +134,8 @@
 }
 
 .death-icon {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   opacity: 0.9;
   animation: deathIconBounce 1s ease-out;
 }
@@ -249,6 +250,98 @@
   margin-top: 2rem;
   justify-content: center;
   align-items: center;
+}
+
+.game-buttons-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  min-height: 280px;
+  backdrop-filter: blur(5px);
+}
+
+.game-buttons-column button {
+  transition: transform 0.2s ease, opacity 0.3s ease, filter 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.game-buttons-column button:not(:disabled):hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.game-buttons-column button:disabled {
+  transform: none !important;
+  box-shadow: none;
+}
+
+.game-buttons-column button:disabled img {
+  opacity: 0.3;
+}
+
+.buttons-column-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.buttons-column-title p {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Ability indicators in center column */
+.ability-reward-display-center {
+  text-align: center;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  background: rgba(255, 215, 0, 0.3);
+  border: 3px solid rgba(255, 215, 0, 0.9);
+  border-radius: 15px;
+  animation: abilityGlow 2s infinite alternate;
+  width: 140px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.ability-reward-display-center p {
+  color: #FFD700;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin: 0 0 15px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+}
+
+.active-ability-display-center {
+  text-align: center;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  background: rgba(255, 100, 0, 0.3);
+  border: 3px solid rgba(255, 100, 0, 0.9);
+  border-radius: 15px;
+  animation: abilityGlow 2s infinite alternate;
+  width: 140px;
+  box-shadow: 0 4px 15px rgba(255, 100, 0, 0.3);
+}
+
+.active-ability-display-center .active-ability-indicator p {
+  color: #FF6400;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin: 0 0 15px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
 }
 
 .multiple-choice-display {
@@ -376,8 +469,8 @@
 }
 
 .silence-icon {
-  width: 160px;
-  height: 120px;
+  width: 200px;
+  height: 150px;
   opacity: 0.9;
   animation: silenceIconPulse 2s ease-in-out infinite;
 }
