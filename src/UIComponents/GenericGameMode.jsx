@@ -14,7 +14,6 @@ import AbilityShield from '../img/Ability_shield.png';
 import AbilitySilence from '../img/Ability_silence.png';
 import AbilityX2 from '../img/Ability_x2.png';
 
-// Generic Spanish questions - moved outside component
 const genericQuestions = [
     {
         type: "open",
@@ -177,13 +176,11 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
         return players.filter(player => !isPlayerDead(player));
     }, [players]);
 
-    // Initialize shuffled questions
     useEffect(() => {
         const shuffled = shuffleArray(genericQuestions);
         setShuffledQuestions(shuffled);
     }, [shuffleArray]);
 
-    // Check for game winner
     useEffect(() => {
         if (!gameCompleted) {
             const alivePlayers = getAlivePlayers();
@@ -200,20 +197,16 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
     }, [players, gameCompleted, isGameWon, getAlivePlayers]);
 
     const restartGame = () => {
-        // Reset all game state
         setPlayers([
             { id: 1, name: 'Equipo 1', hp: 10, maxHp: 10, shield: false, x2Active: false, abilities: { shield: false, silence: false, x2: false }, color: OrangeRounded },
             { id: 2, name: 'Equipo 2', hp: 10, maxHp: 10, shield: false, x2Active: false, abilities: { shield: false, silence: false, x2: false }, color: BlueRounded },
             { id: 3, name: 'Equipo 3', hp: 10, maxHp: 10, shield: false, x2Active: false, abilities: { shield: false, silence: false, x2: false }, color: RedRounded },
             { id: 4, name: 'Equipo 4', hp: 10, maxHp: 10, shield: false, x2Active: false, abilities: { shield: false, silence: false, x2: false }, color: GreenRounded }
         ]);
-
-        // Shuffle questions again
         const shuffled = shuffleArray(genericQuestions);
         setShuffledQuestions(shuffled);
         setCurrentQuestionIndex(0);
 
-        // Reset game state
         setIsCardFlipped(false);
         setShowAnswer(false);
         setIsAnimatingAnswer(false);
@@ -258,7 +251,6 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
             setIsCardFlipped(true);
             setGamePhase('answer-question');
 
-            // Generate ability chance (same logic as original)
             if (currentQuestion) {
                 if (isGameWon) {
                     console.log('Game is won, no abilities given');
@@ -304,7 +296,6 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
         if (currentQuestionIndex < shuffledQuestions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
-            // Restart from beginning if we reach the end
             setCurrentQuestionIndex(0);
         }
 
@@ -316,15 +307,12 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
         setShowAbilityIcon(false);
         setAvailableAbility(null);
 
-        // Clear damaged players animation after a delay
         setTimeout(() => {
             setDamagedPlayers(new Set());
         }, 1000);
 
-        // Clear newly abilities indicator
         setPlayersWithNewAbilities(new Set());
 
-        // Decrement silence turns and remove expired silences
         setSilencedPlayers(prev => {
             const newMap = new Map();
             for (const [playerId, turnsRemaining] of prev) {
@@ -332,7 +320,6 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
                 if (newTurns > 0) {
                     newMap.set(playerId, newTurns);
                 }
-                // If newTurns <= 0, don't add to newMap (effectively removing the silence)
             }
             return newMap;
         });
@@ -359,7 +346,6 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
             setGamePhase('select-target');
         }
     }; const handleWrongAnswer = () => {
-        // Apply self-damage when answering wrong
         if (activePlayerId && !isGameWon) {
             handleDamagePlayer(activePlayerId);
         } else {
@@ -375,41 +361,31 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
 
         let damage = 1;
 
-        // Check if active player has x2 active
         if (activePlayer.x2Active) {
             damage = 2;
         }
 
-        // Check if target has shield
         if (targetPlayer.shield) {
-            // Remove shield instead of taking damage
             setPlayers(prevPlayers =>
                 prevPlayers.map(player => {
                     if (player.id === targetId && player.id === activePlayerId) {
-                        // Self-damage with shield: remove shield and x2Active if applicable
                         return { ...player, shield: false, x2Active: false };
                     } else if (player.id === targetId) {
-                        // Other player with shield: just remove shield
                         return { ...player, shield: false };
                     } else if (player.id === activePlayerId && player.x2Active) {
-                        // Remove x2Active from attacking player
                         return { ...player, x2Active: false };
                     }
                     return player;
                 })
             );
         } else {
-            // Apply damage
             setPlayers(prevPlayers =>
                 prevPlayers.map(player => {
                     if (player.id === targetId && player.id === activePlayerId) {
-                        // Self-damage: apply damage and remove x2Active if applicable
                         return { ...player, hp: Math.max(0, player.hp - damage), x2Active: false };
                     } else if (player.id === targetId) {
-                        // Other player: just apply damage
                         return { ...player, hp: Math.max(0, player.hp - damage) };
                     } else if (player.id === activePlayerId && player.x2Active) {
-                        // Remove x2Active from attacking player
                         return { ...player, x2Active: false };
                     }
                     return player;
@@ -432,7 +408,6 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
         setActiveAbilityType(abilityType);
 
         if (abilityType === 'shield') {
-            // Activate shield
             setPlayers(prevPlayers =>
                 prevPlayers.map(p =>
                     p.id === playerId
@@ -440,16 +415,13 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
                         : p
                 )
             );
-            // Clear active ability state immediately
             setPlayerUsingAbility(null);
             setActiveAbilityType(null);
         } else if (abilityType === 'silence') {
-            // Start silence selection mode
             setGamePhaseBeforeAbility(gamePhase);
             setGamePhase('ability-silence');
             return;
         } else if (abilityType === 'x2') {
-            // Activate x2 for next attack
             setPlayers(prevPlayers =>
                 prevPlayers.map(p =>
                     p.id === playerId
@@ -457,15 +429,11 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
                         : p
                 )
             );
-            // Clear active ability state immediately for x2
             setPlayerUsingAbility(null);
             setActiveAbilityType(null);
         }
     }; const handleSilencePlayer = (targetId) => {
-        // Add to silenced players with 2 turns remaining (current turn + next turn)
         setSilencedPlayers(prev => new Map(prev).set(targetId, 2));
-
-        // Remove silence ability from using player
         setPlayers(prevPlayers =>
             prevPlayers.map(player =>
                 player.id === playerUsingAbility
@@ -474,7 +442,6 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
             )
         );
 
-        // Return to previous game phase
         setGamePhase(gamePhaseBeforeAbility);
         setGamePhaseBeforeAbility(null);
         setPlayerUsingAbility(null);
