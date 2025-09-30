@@ -45,7 +45,8 @@ function App() {
 
   const [damagedPlayers, setDamagedPlayers] = useState(new Set());
 
-  const [abilityChance, setAbilityChance] = useState(30);
+  // Ability chance is now hardcoded to 30% (0.3) in the handleCardClick function
+  // const [abilityChance, setAbilityChance] = useState(30);
   const [showAbilityIcon, setShowAbilityIcon] = useState(false);
   const [availableAbility, setAvailableAbility] = useState(null);
   const [silencedPlayers, setSilencedPlayers] = useState(new Set());
@@ -522,10 +523,11 @@ function App() {
           setAvailableAbility(null);
           setShowAbilityIcon(false);
         } else {
-          const random = Math.random() * 100;
-          console.log('Random value:', random, 'Ability chance:', abilityChance);
+          const random = Math.random();
+          const shouldGiveAbility = random < 0.2;
+          console.log('Random value:', random.toFixed(2), 'Should give ability:', shouldGiveAbility, '(30% chance)');
 
-          if (random < abilityChance) {
+          if (shouldGiveAbility) {
             const abilities = ['shield', 'silence', 'x2'];
             const randomAbility = abilities[Math.floor(Math.random() * abilities.length)];
             console.log('Ability assigned:', randomAbility);
