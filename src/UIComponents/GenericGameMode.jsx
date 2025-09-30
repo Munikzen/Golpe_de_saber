@@ -35,7 +35,7 @@ const genericQuestions = [
         type: "mc",
         question: "¿Cuántos continentes hay en el mundo?",
         options: ["5", "6", "7", "8"],
-        correctAnswer: "7"
+        correctAnswer: "5"
     },
     {
         type: "open",
@@ -111,7 +111,7 @@ const genericQuestions = [
     {
         type: "mc",
         question: "¿En qué año se fundó la ONU?",
-        options: ["1944", "1945", "1946", "1947"],
+        options: ["1844", "1945", "1146", "1247"],
         correctAnswer: "1945"
     },
     {
@@ -122,7 +122,7 @@ const genericQuestions = [
     {
         type: "mc",
         question: "¿Cuántos minutos tiene un día?",
-        options: ["1440", "1400", "1480", "1500"],
+        options: ["1440", "2400", "7480", "1500"],
         correctAnswer: "1440"
     }
 ];
@@ -235,6 +235,8 @@ const GenericGameMode = ({ screenSize, getPlayerCardDimensions, getButtonDimensi
 
             setActivePlayerId(playerId);
             setGamePhase('player-selected');
+        } else if (gamePhase === 'player-selected') {
+            setActivePlayerId(playerId);
         } else if (gamePhase === 'select-target') {
             if (playerId === activePlayerId) return;
 

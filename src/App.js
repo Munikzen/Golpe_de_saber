@@ -45,7 +45,7 @@ function App() {
 
   const [damagedPlayers, setDamagedPlayers] = useState(new Set());
 
-  const [abilityChance, setAbilityChance] = useState(100);
+  const [abilityChance, setAbilityChance] = useState(30);
   const [showAbilityIcon, setShowAbilityIcon] = useState(false);
   const [availableAbility, setAvailableAbility] = useState(null);
   const [silencedPlayers, setSilencedPlayers] = useState(new Set());
