@@ -14,12 +14,24 @@ function Card({
         <div
             className="card-3d-wrapper"
             onClick={onClick}
+            style={{
+                width: width ? `${width}px` : '660px',
+                height: height ? `${height}px` : '870px',
+            }}
         >
-            <div className={`card-flip-inner${isFlipped ? ' flipped' : ''}`}>
+            <div
+                className={`card-flip-inner${isFlipped ? ' flipped' : ''}`}
+                style={{
+                    width: width ? `${width}px` : '660px',
+                    height: height ? `${height}px` : '870px',
+                }}
+            >
                 <div
                     className="card-face card-back"
                     style={{
                         backgroundImage: `url(${cardBack})`,
+                        width: width ? `${width}px` : '660px',
+                        height: height ? `${height}px` : '870px',
                     }}
                 />
                 <div
@@ -32,6 +44,8 @@ function Card({
                         alignItems: 'center',
                         boxSizing: 'border-box',
                         transform: 'rotateY(180deg)',
+                        width: width ? `${width}px` : '660px',
+                        height: height ? `${height}px` : '870px',
                     }}
                 >
                     <div className="card-content">

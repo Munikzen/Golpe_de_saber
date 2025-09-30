@@ -112,6 +112,52 @@
     }
 }
 
+.ability-icon.x2-ready {
+    background: rgba(255, 69, 0, 0.3);
+    border: 2px solid rgba(255, 69, 0, 0.8);
+    animation: x2ReadyPulse 1.5s infinite;
+}
+
+.ability-icon.x2-ready img {
+    filter: brightness(1.3) drop-shadow(0 0 10px rgba(255, 69, 0, 0.8));
+}
+
+@keyframes x2ReadyPulse {
+
+    0%,
+    100% {
+        border-color: rgba(255, 69, 0, 0.6);
+        background: rgba(255, 69, 0, 0.2);
+    }
+
+    50% {
+        border-color: rgba(255, 69, 0, 1);
+        background: rgba(255, 69, 0, 0.4);
+    }
+}
+
+.ability-icon.active-ability-indicator {
+    background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+    border: 3px solid #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+    animation: activeAbilityGlow 1.5s infinite alternate;
+}
+
+.ability-icon.active-ability-indicator img {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+@keyframes activeAbilityGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 25px rgba(255, 107, 107, 0.9);
+    }
+}
+
 .ability-icon:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: scale(1.1);
@@ -121,18 +167,117 @@
     transform: scale(1.1);
 }
 
-@media (max-width: 768px) {
+/* ===== PLAYER CARD RESPONSIVE DESIGN ===== */
+
+/* Laptop Specific (1200px - 1399px) - Optimized for 1366x768 */
+@media (min-width: 1200px) and (max-width: 1399px) {
     .player-name {
-        font-size: 1.25em;
+        font-size: 1.6em;
+        margin-bottom: 8px;
     }
 
     .ability-icon {
+        width: 58px;
+        height: 58px;
+    }
+
+    .ability-icon img {
         width: 44px;
         height: 44px;
     }
 
+    .hp-area {
+        padding: 6px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+    }
+
+    .abilities-area {
+        padding: 14px 10px;
+        border-radius: 10px;
+        gap: 8px;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .player-name {
+        font-size: 1.5em;
+    }
+
+    .ability-icon {
+        width: 55px;
+        height: 55px;
+    }
+
     .ability-icon img {
-        width: 31px;
-        height: 31px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .hp-area {
+        padding: 5px;
+        border-radius: 8px;
+    }
+
+    .abilities-area {
+        padding: 12px 8px;
+        border-radius: 8px;
+    }
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+    .player-name {
+        font-size: 1.3em;
+        letter-spacing: 0.4px;
+    }
+
+    .ability-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .ability-icon img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .hp-area {
+        padding: 4px;
+        border-radius: 6px;
+    }
+
+    .abilities-area {
+        padding: 10px 6px;
+        border-radius: 6px;
+    }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+    .player-name {
+        font-size: 1.1em;
+        letter-spacing: 0.3px;
+    }
+
+    .ability-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ability-icon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .hp-area {
+        padding: 3px;
+        border-radius: 5px;
+    }
+
+    .abilities-area {
+        padding: 8px 5px;
+        border-radius: 5px;
     }
 }

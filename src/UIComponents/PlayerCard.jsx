@@ -12,6 +12,8 @@ const PlayerCard = ({
     maxHp,
     shield,
     abilities = {},
+    x2Active = false,
+    activeAbilityType = null,
     background,
     width = 300,
     height = 200,
@@ -39,7 +41,7 @@ const PlayerCard = ({
 
             <div className="abilities-area">
                 <div
-                    className={`ability-icon ${abilities.shield && canUseAbilities ? 'clickable' : ''}`}
+                    className={`ability-icon ${abilities.shield && canUseAbilities ? 'clickable' : ''} ${activeAbilityType === 'shield' ? 'active-ability-indicator' : ''}`}
                     onClick={(e) => {
                         if (abilities.shield && canUseAbilities) {
                             e.stopPropagation();
@@ -50,11 +52,11 @@ const PlayerCard = ({
                     <img
                         src={ShieldIcon}
                         alt="Shield"
-                        className={abilities.shield ? 'active' : 'inactive'}
+                        className={`${abilities.shield ? 'active' : 'inactive'} ${activeAbilityType === 'shield' ? 'pulsing' : ''}`}
                     />
                 </div>
                 <div
-                    className={`ability-icon ${abilities.silence && canUseAbilities ? 'clickable' : ''}`}
+                    className={`ability-icon ${abilities.silence && canUseAbilities ? 'clickable' : ''} ${activeAbilityType === 'silence' ? 'active-ability-indicator' : ''}`}
                     onClick={(e) => {
                         if (abilities.silence && canUseAbilities) {
                             e.stopPropagation();
@@ -65,11 +67,11 @@ const PlayerCard = ({
                     <img
                         src={SilenceIcon}
                         alt="Silence"
-                        className={abilities.silence ? 'active' : 'inactive'}
+                        className={`${abilities.silence ? 'active' : 'inactive'} ${activeAbilityType === 'silence' ? 'pulsing' : ''}`}
                     />
                 </div>
                 <div
-                    className={`ability-icon ${abilities.x2 && canUseAbilities ? 'clickable' : ''}`}
+                    className={`ability-icon ${abilities.x2 && canUseAbilities ? 'clickable' : ''} ${x2Active ? 'x2-ready' : ''} ${activeAbilityType === 'x2' ? 'active-ability-indicator' : ''}`}
                     onClick={(e) => {
                         if (abilities.x2 && canUseAbilities) {
                             e.stopPropagation();
@@ -80,7 +82,7 @@ const PlayerCard = ({
                     <img
                         src={X2Icon}
                         alt="X2"
-                        className={abilities.x2 ? 'active' : 'inactive'}
+                        className={`${abilities.x2 || x2Active ? 'active' : 'inactive'} ${activeAbilityType === 'x2' ? 'pulsing' : ''}`}
                     />
                 </div>
             </div>

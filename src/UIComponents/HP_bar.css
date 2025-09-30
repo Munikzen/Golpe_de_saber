@@ -50,3 +50,65 @@
         opacity: 1;
     }
 }
+
+/* ===== HP BAR RESPONSIVE DESIGN ===== */
+
+/* Laptop Specific (1200px - 1399px) - Optimized for 1366x768 */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .health-bar img {
+        width: 34px !important;
+        height: 34px !important;
+        margin-right: 4px !important;
+    }
+
+    .shield-icon {
+        width: 28px !important;
+        height: 28px !important;
+        margin-left: 10px !important;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .health-bar img {
+        width: 30px !important;
+        height: 30px !important;
+        margin-right: 3px !important;
+    }
+
+    .shield-icon {
+        width: 25px !important;
+        height: 25px !important;
+        margin-left: 8px !important;
+    }
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+    .health-bar img {
+        width: 26px !important;
+        height: 26px !important;
+        margin-right: 2px !important;
+    }
+
+    .shield-icon {
+        width: 22px !important;
+        height: 22px !important;
+        margin-left: 6px !important;
+    }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+    .health-bar img {
+        width: 20px !important;
+        height: 20px !important;
+        margin-right: 2px !important;
+    }
+
+    .shield-icon {
+        width: 18px !important;
+        height: 18px !important;
+        margin-left: 5px !important;
+    }
+}
